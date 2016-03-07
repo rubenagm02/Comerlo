@@ -1,5 +1,6 @@
 <?php
 require_once 'Conexion.php';
+require_once 'Usuario.php';
 /**
  * Created by PhpStorm.
  * User: Ruben
@@ -70,6 +71,7 @@ class DaoProveedor extends Conexion {
 
     private function crearObjeto ($fila) {
         $proveedor = new Proveedor();
+        $daoUsuario = new DaoUsuario();
 
         $proveedor->setId($fila['Id']);
         $proveedor->setNombre($fila['Nombre']);
@@ -79,7 +81,7 @@ class DaoProveedor extends Conexion {
         $proveedor->setTelefono($fila['Telefono']);
         $proveedor->setCorreo($fila['Correo']);
         $proveedor->setObservaciones($fila['Observaciones']);
-        $proveedor->setUsuario($fila['Usuario']);
+        $proveedor->setUsuario($daoUsuario->consultar($fila['Usuario']));
 
         return $proveedor;
     }

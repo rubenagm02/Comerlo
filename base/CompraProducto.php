@@ -1,24 +1,25 @@
 <?php
 require_once 'Conexion.php';
+require_once 'Usuario.php';
 /**
  * Created by PhpStorm.
  * User: Ruben
  * Date: 06/03/2016
- * Time: 10:41 PM
+ * Time: 10:54 PM
  */
 
-class DaoVentaProducto extends Conexion {
+class DaoCompraProducto extends Conexion {
 
-    public function insertar (VentaProducto $ventaProducto) {
-        $query = "INSERT INTO VentaProducto VALUES (DEFAULT,
-                      {$ventaProducto->getIdProducto()},
-                      {$ventaProducto->getIdCliente()},
-                      '{$ventaProducto->getDescripcion()}',
-                      '{$ventaProducto->getFactura()}',
-                      '{$ventaProducto->getFecha()}',
-                      {$ventaProducto->getCantidad()},
+    public function insertar (CompraProducto $compraProducto) {
+        $query = "INSERT INTO CompraProducto VALUES (DEFAULT,
+                      {$compraProducto->getIdProducto()},
+                      {$compraProducto->getIdProveedor()},
+                      '{$compraProducto->getDescripcion()}',
+                      '{$compraProducto->getFactura()}',
+                      '{$compraProducto->getFecha()}',
+                      {$compraProducto->getCantidad()},
                       1,
-                      {$ventaProducto->getUsuario()});";
+                      {$compraProducto->getUsuario()});";
 
         $consulta = $this->conexion->query($query);
 
@@ -31,11 +32,11 @@ class DaoVentaProducto extends Conexion {
         }
     }
 
-    public function actualizar (VentaProducto $ventaProducto) {
-        $query = "UPDATE VentaProducto SET
-                      Estatus = {$ventaProducto->getEstatus()},
-                      Usuario = {$ventaProducto->getUsuario()}
-                      WHERE Id = {$ventaProducto->getId()};";
+    public function actualizar (CompraProducto $compraProducto) {
+        $query = "UPDATE CompraProducto SET
+                      Estatus = {$compraProducto->getEstatus()},
+                      Usuario = {$compraProducto->getUsuario()}
+                      WHERE Id = {$compraProducto->getId()};";
 
         $consulta = $this->conexion->query($query);
 
@@ -49,7 +50,7 @@ class DaoVentaProducto extends Conexion {
     }
 
     public function consultar ($id) {
-        $query = "SELECT * FROM VentaProducto WHERE Id = $id";
+        $query = "SELECT * FROM CompraProducto WHERE Id = $id";
 
         $consulta = $this->conexion->query($query);
 
@@ -63,26 +64,28 @@ class DaoVentaProducto extends Conexion {
     }
 
     private function crearObjeto ($fila) {
-        $ventaProducto = new VentaProducto();
+        $compraProducto = new CompraProducto();
+        $daoUsuario = new DaoUsuario();
 
-        $ventaProducto->setId($fila['Id']);
-        $ventaProducto->setIdProducto($fila['IdProducto']);
-        $ventaProducto->setIdCliente($fila['IdCliente']);
-        $ventaProducto->setDescripcion($fila['Descripcion']);
-        $ventaProducto->setFactura($fila['Factura']);
-        $ventaProducto->setFecha($fila['Fecha']);
-        $ventaProducto->setCantidad($fila['Cantidad']);
-        $ventaProducto->setEstatus($fila['Estatus']);
-        $ventaProducto->setUsuario($fila['Usuario']);
+        $compraProducto->setId($fila['Id']);
+        $compraProducto->setIdProducto($fila['IdProducto']);
+        $compraProducto->setIdProveedor($fila['IdProveedor']);
+        $compraProducto->setDescripcion($fila['Descripcion']);
+        $compraProducto->setFactura($fila['Factura']);
+        $compraProducto->setFecha($fila['Fecha']);
+        $compraProducto->setCantidad($fila['Cantidad']);
+        $compraProducto->setEstatus($fila['Estatus']);
+        $compraProducto->setUsuario($daoUsuario->consultar($fila['Usuario']));
 
-        return $ventaProducto;
+        return $compraProducto;
     }
 }
 
-class VentaProducto {
+class CompraProducto {
+
     private $id;
+    private $idProveedor;
     private $idProducto;
-    private $idCliente;
     private $descripcion;
     private $factura;
     private $fecha;
@@ -120,22 +123,6 @@ class VentaProducto {
     public function setIdProducto($idProducto)
     {
         $this->idProducto = $idProducto;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdCliente()
-    {
-        return $this->idCliente;
-    }
-
-    /**
-     * @param mixed $idCliente
-     */
-    public function setIdCliente($idCliente)
-    {
-        $this->idCliente = $idCliente;
     }
 
     /**
@@ -216,6 +203,22 @@ class VentaProducto {
     public function setUsuario($usuario)
     {
         $this->usuario = $usuario;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdProveedor()
+    {
+        return $this->idProveedor;
+    }
+
+    /**
+     * @param mixed $idProveedor
+     */
+    public function setIdProveedor($idProveedor)
+    {
+        $this->idProveedor = $idProveedor;
     }
 
     /**
