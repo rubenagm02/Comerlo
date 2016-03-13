@@ -1,4 +1,8 @@
 <!-- Aquí va todo el contenido de la página -->
+
+</div>
+</div>
+</section>
 </div><!-- /.content-wrapper -->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">

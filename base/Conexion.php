@@ -9,10 +9,10 @@ require_once 'Conexion.php';
 
 class Conexion {
     public $conexion;
-    private $usuario;
-    private $password;
-    private $host;
-    private $baseDatos;
+    private $usuario = "root";
+    private $password = "";
+    private $host = "localhost";
+    private $baseDatos = "comerlo";
 
     function __construct () {
         $this->conexion = mysqli_connect($this->host, $this->usuario, $this->password, $this->baseDatos);

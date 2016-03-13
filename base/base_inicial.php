@@ -124,4 +124,7 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Venta</a></li>
             </ol>
         </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-12">
         <!-- Aquí va todo el contenido de la página -->

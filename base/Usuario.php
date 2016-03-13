@@ -5,8 +5,8 @@
  * Date: 06/03/2016
  * Time: 11:05 PM
  */
-
-class DaoUsuario {
+require_once 'Conexion.php';
+class DaoUsuario extends  Conexion{
 
     public function insertar (Usuario $usuario) {
         $query = "INSERT INTO Usuario VALUES (DEFAULT,
@@ -16,7 +16,7 @@ class DaoUsuario {
 
         $consulta = $this->conexion->query($query);
 
-        if ($query) {
+        if ($consulta) {
 
             return true;
         } else {
@@ -50,6 +50,26 @@ class DaoUsuario {
         if ($consulta) {
 
             return $this->crearObjeto($consulta->fetch_assoc());
+        } else {
+
+            return false;
+        }
+    }
+
+    public function login ($usuario, $password) {
+        $query = "SELECT * FROM Usuario WHERE Nombre = '$usuario' AND Password = '$password'";
+
+        $consulta = $this->conexion->query($query);
+
+        if ($consulta) {
+
+            if ($consulta->num_rows > 0) {
+
+                return $this->crearObjeto($consulta->fetch_assoc());
+            } else {
+
+                return false;
+            }
         } else {
 
             return false;
