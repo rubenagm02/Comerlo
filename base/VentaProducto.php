@@ -1,5 +1,7 @@
 <?php
 require_once 'Conexion.php';
+require_once 'Usuario.php';
+require_once 'DetalleVentaProducto.php';
 /**
  * Created by PhpStorm.
  * User: Ruben
@@ -23,8 +25,16 @@ class DaoVentaProducto extends Conexion {
         $consulta = $this->conexion->query($query);
 
         if ($query) {
+            $daoDetalleVentaProducto = new DaoDetalleVentaProducto();
 
-            return true;
+            //Se insertan los productos
+            $productos = $ventaProducto->getProductos();
+
+            foreach ($productos as $producto) {
+
+                $daoDetalleVentaProducto->insertar($producto);
+            }
+            return $this->conexion->insert_id;
         } else {
 
             return false;
@@ -64,6 +74,7 @@ class DaoVentaProducto extends Conexion {
 
     private function crearObjeto ($fila) {
         $ventaProducto = new VentaProducto();
+        $daoUsuario = new DaoUsuario();
 
         $ventaProducto->setId($fila['Id']);
         $ventaProducto->setIdProducto($fila['IdProducto']);
@@ -73,7 +84,7 @@ class DaoVentaProducto extends Conexion {
         $ventaProducto->setFecha($fila['Fecha']);
         $ventaProducto->setCantidad($fila['Cantidad']);
         $ventaProducto->setEstatus($fila['Estatus']);
-        $ventaProducto->setUsuario($fila['Usuario']);
+        $ventaProducto->setUsuario($daoUsuario->consultar($fila['Usuario']));
 
         return $ventaProducto;
     }
@@ -89,6 +100,7 @@ class VentaProducto {
     private $cantidad;
     private $estatus;
     private $usuario;
+    private $productos;
 
     /**
      * @return mixed
@@ -232,6 +244,22 @@ class VentaProducto {
     public function setEstatus($estatus)
     {
         $this->estatus = $estatus;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * @param array $productos
+     */
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
     }
 
 }

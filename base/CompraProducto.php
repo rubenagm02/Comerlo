@@ -1,6 +1,7 @@
 <?php
 require_once 'Conexion.php';
 require_once 'Usuario.php';
+require_once 'DetalleCompraProducto.php';
 /**
  * Created by PhpStorm.
  * User: Ruben
@@ -17,15 +18,22 @@ class DaoCompraProducto extends Conexion {
                       '{$compraProducto->getDescripcion()}',
                       '{$compraProducto->getFactura()}',
                       '{$compraProducto->getFecha()}',
-                      {$compraProducto->getCantidad()},
                       1,
                       {$compraProducto->getUsuario()});";
 
         $consulta = $this->conexion->query($query);
 
         if ($query) {
+            $daoDetalleCompraProductos = new DaoDetalleCompraProducto();
 
-            return true;
+            //Se insertan los productos
+            $productos = $compraProducto->getProductos();
+
+            foreach ($productos as $producto) {
+
+                $daoDetalleCompraProductos->insertar($producto);
+            }
+            return $this->conexion->insert_id;
         } else {
 
             return false;
@@ -73,7 +81,6 @@ class DaoCompraProducto extends Conexion {
         $compraProducto->setDescripcion($fila['Descripcion']);
         $compraProducto->setFactura($fila['Factura']);
         $compraProducto->setFecha($fila['Fecha']);
-        $compraProducto->setCantidad($fila['Cantidad']);
         $compraProducto->setEstatus($fila['Estatus']);
         $compraProducto->setUsuario($daoUsuario->consultar($fila['Usuario']));
 
@@ -89,9 +96,9 @@ class CompraProducto {
     private $descripcion;
     private $factura;
     private $fecha;
-    private $cantidad;
     private $estatus;
     private $usuario;
+    private $productos;
 
     /**
      * @return mixed
@@ -176,22 +183,6 @@ class CompraProducto {
     /**
      * @return mixed
      */
-    public function getCantidad()
-    {
-        return $this->cantidad;
-    }
-
-    /**
-     * @param mixed $cantidad
-     */
-    public function setCantidad($cantidad)
-    {
-        $this->cantidad = $cantidad;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getUsuario()
     {
         return $this->usuario;
@@ -235,6 +226,22 @@ class CompraProducto {
     public function setEstatus($estatus)
     {
         $this->estatus = $estatus;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * @param array $productos
+     */
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
     }
 
 }
