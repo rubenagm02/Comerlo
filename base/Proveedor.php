@@ -41,7 +41,7 @@ class DaoProveedor extends Conexion {
                       Telefono = '{$proveedor->getTelefono()}',
                       Correo = '{$proveedor->getCorreo()}',
                       Observaciones = '{$proveedor->getObservaciones()}',
-                      Usuario = {$proveedor->getUsuario()})
+                      Usuario = {$proveedor->getUsuario()}
                       WHERE Id = {$proveedor->getId()};";
 
         $consulta = $this->conexion->query($query);
@@ -63,6 +63,26 @@ class DaoProveedor extends Conexion {
         if ($consulta) {
 
             return $this->crearObjeto($consulta->fetch_assoc());
+        } else {
+
+            return false;
+        }
+    }
+
+    public function consultarTodo(){
+        $query = "SELECT * FROM Proveedor";
+
+        $consulta = $this->conexion->query($query);
+
+        if ($consulta) {
+            $resultado = array();
+
+            for ($x = 0; $x < $consulta->num_rows; $x++) {
+                $consulta->data_seek($x);
+                array_push($resultado, $this->crearObjeto($consulta->fetch_assoc()));
+
+            }
+            return $resultado;
         } else {
 
             return false;
@@ -92,6 +112,7 @@ class Proveedor {
     private $id;
     private $nombre;
     private $razonSocial;
+    private $rfc;
     private $nombreContacto;
     private $telefono;
     private $correo;
@@ -224,6 +245,22 @@ class Proveedor {
     public function setUsuario($usuario)
     {
         $this->usuario = $usuario;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRfc()
+    {
+        return $this->rfc;
+    }
+
+    /**
+     * @param mixed $rfc
+     */
+    public function setRfc($rfc)
+    {
+        $this->rfc = $rfc;
     }
 
 

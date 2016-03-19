@@ -18,10 +18,11 @@ class DaoProducto extends Conexion {
                       '{$producto->getMedida()}',
                       {$producto->getEstatus()},
                       {$producto->getPrecio()},
-                      0);";
+                      0,
+                      {$producto->getUsuario()});";
 
         $consulta = $this->conexion->query($query);
-
+        var_dump($this->conexion->error);
         if ($consulta) {
 
             return true;
@@ -32,7 +33,7 @@ class DaoProducto extends Conexion {
     }
 
     public function actualizar (Producto $producto) {
-        $query = "UPDATE Prodcuto SET
+        $query = "UPDATE Producto SET
                       Nombre = '{$producto->getNombre()}',
                       Descripcion = '{$producto->getDescripcion()}',
                       NumeroIdentificacion = '{$producto->getNumeroIdentificacion()}',
@@ -67,6 +68,26 @@ class DaoProducto extends Conexion {
         }
     }
 
+    public function consultarTodo(){
+        $query = "SELECT * FROM Producto";
+
+        $consulta = $this->conexion->query($query);
+
+        if ($consulta) {
+            $resultado = array();
+
+            for ($x = 0; $x < $consulta->num_rows; $x++) {
+                $consulta->data_seek($x);
+                array_push($resultado, $this->crearObjeto($consulta->fetch_assoc()));
+
+            }
+            return $resultado;
+        } else {
+
+            return false;
+        }
+    }
+
     private function crearObjeto ($fila) {
         $producto = new Producto();
         $daoUsuario = new DaoUsuario();
@@ -74,6 +95,7 @@ class DaoProducto extends Conexion {
         $producto->setNombre($fila['Nombre']);
         $producto->setNumeroIdentificacion($fila['NumeroIdentificacion']);
         $producto->setMedida($fila['Medida']);
+        $producto->setDescripcion($fila['Descripcion']);
         $producto->setEstatus($fila['Estatus']);
         $producto->setPrecio($fila['Precio']);
         $producto->setExistencia($fila['Existencia']);

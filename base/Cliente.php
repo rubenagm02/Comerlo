@@ -23,9 +23,29 @@ class DaoCliente extends Conexion {
 
         $consulta = $this->conexion->query($query);
 
-        if ($query) {
+        if ($consulta) {
 
             return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    public function consultarTodo(){
+        $query = "SELECT * FROM Cliente";
+
+        $consulta = $this->conexion->query($query);
+
+        if ($consulta) {
+            $resultado = array();
+
+            for ($x = 0; $x < $consulta->num_rows; $x++) {
+                $consulta->data_seek($x);
+                array_push($resultado, $this->crearObjeto($consulta->fetch_assoc()));
+
+            }
+            return $resultado;
         } else {
 
             return false;
@@ -41,7 +61,7 @@ class DaoCliente extends Conexion {
                       Telefono = '{$cliente->getTelefono()}',
                       Correo = '{$cliente->getCorreo()}',
                       Observaciones = '{$cliente->getObservaciones()}',
-                      Usuario = {$cliente->getUsuario()})
+                      Usuario = {$cliente->getUsuario()}
                       WHERE Id = {$cliente->getId()};";
 
         $consulta = $this->conexion->query($query);

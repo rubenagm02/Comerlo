@@ -95,9 +95,9 @@
                         <i class="fa fa-dashboard"></i> <span>Productos</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> Alta de producto</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Baja de producto</a></li>
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> Ver productos</a></li>
+                        <li><a href="altaproducto.php"><i class="fa fa-circle-o"></i> Alta de producto</a></li>
+                        <!--<li><a href="index2.html"><i class="fa fa-circle-o"></i> Baja de producto</a></li>-->
+                        <li><a href="totalproductos.php"><i class="fa fa-circle-o"></i> Ver productos</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -105,8 +105,17 @@
                         <i class="fa fa-dashboard"></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> Alta de clientes</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Mostrar clientes</a></li>
+                        <li><a href="altacliente.php"><i class="fa fa-circle-o"></i> Alta de cliente</a></li>
+                        <li><a href="totalclientes.php"><i class="fa fa-circle-o"></i> Mostrar clientes</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Proveedores</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="altaproveedor.php"><i class="fa fa-circle-o"></i> Alta de proveedor</a></li>
+                        <li><a href="totalproveedores.php"><i class="fa fa-circle-o"></i> Mostrar proveedores</a></li>
                     </ul>
                 </li>
             </ul>
