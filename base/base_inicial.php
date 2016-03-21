@@ -57,6 +57,16 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Barra de navegación-->
+                    <li class="dropdown notifications-menu">
+                        <a href="nuevaventa.php" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-dollar"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-money"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
