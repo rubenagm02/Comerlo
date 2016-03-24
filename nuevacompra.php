@@ -1,7 +1,7 @@
 <?php
 
 require_once 'base/Producto.php';
-require_once 'base/Cliente.php';
+require_once 'base/Proveedor.php';
 /**
  * Created by PhpStorm.
  * User: root
@@ -13,8 +13,8 @@ require_once 'base/base_inicial.php';
 
 $daoProducto = new DaoProducto();
 $productos = $daoProducto->consultarTodo();
-$daoCliente = new DaoCliente();
-$clientes = $daoCliente->consultarTodo();
+$daoProveedor = new DaoProveedor();
+$proveedores = $daoProveedor->consultarTodo();
 ?>
 
     <div class="row">
@@ -76,7 +76,7 @@ $clientes = $daoCliente->consultarTodo();
         <div class="col-lg-8">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Productos en la venta</h3>
+                    <h3 class="box-title">Productos en la compra</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -109,12 +109,12 @@ $clientes = $daoCliente->consultarTodo();
                     <select class="form-control">
                         <option value="0">Selecciona un cliente...</option>
                         <?php
-                        foreach ($clientes as $cliente) {
-                            echo "<option value='{$cliente->getId()}'>{$cliente->getNombre()}</option>";
+                        foreach ($proveedores as $proveedor) {
+                            echo "<option value='{$proveedor->getId()}'>{$proveedor->getNombre()}</option>";
                         }
                         ?>
                     </select>
-                 </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-8">
@@ -129,11 +129,11 @@ $clientes = $daoCliente->consultarTodo();
             </div>
         </div>
     </div>
-<div class="row">
-    <div class="col-lg-12">
-        <a class="btn btn-sm btn-info btn-flat pull-left">Terminar</a>
+    <div class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-sm btn-info btn-flat pull-left">Terminar</a>
+        </div>
     </div>
-</div>
-<script src="js/nuevaventa.js"></script>
+    <script src="js/nuevaventa.js"></script>
 <?php
 require_once 'base/base_final.php';

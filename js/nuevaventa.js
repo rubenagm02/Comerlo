@@ -22,3 +22,14 @@ function cargarFecha () {
     today = mm+'/'+dd+'/'+yyyy;
     $("#fecha_actual").text(today);
 }
+
+function agregarProducto (producto, nombre, precio) {
+    var cantidad = prompt("Introduce la cantidad de productos");
+
+    var fila = '<tr class="producto_agregado" producto="' + producto + '" cantidad="' + cantidad + '"><td>' + nombre + '</td><td>'
+                + precio + '</td><td>' + cantidad + '</td><td>'
+                + (precio * cantidad)
+                + '</td><td><a class="btn btn-sm btn-info btn-flat pull-left">Quitar</a></td></tr>';
+
+    $("#productos_agregados").append(fila);
+}

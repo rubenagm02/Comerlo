@@ -14,7 +14,8 @@ class DaoDetalleVentaProducto extends Conexion{
         $query = "INSERT INTO DetalleVentaProducto VALUES (DEFAULT ,
                       {$detalleVentaProducto->getIdVentaProducto()},
                       {$detalleVentaProducto->getIdProducto()},
-                      {$detalleVentaProducto->getCantidad()})";
+                      {$detalleVentaProducto->getCantidad()},
+                      {$detalleVentaProducto->getTotal()})";
 
         $consulta = $this->conexion->query($query);
 
@@ -53,7 +54,7 @@ class DaoDetalleVentaProducto extends Conexion{
         $detalleVentaProducto->setCantidad($fila['Cantidad']);
         $detalleVentaProducto->setIdVentaProducto($fila['IdVentaProducto']);
         $detalleVentaProducto->setIdProducto($fila['IdProducto']);
-
+        $detalleVentaProducto->setTotal($fila['Total']);
         return $detalleVentaProducto;
     }
 }
@@ -63,6 +64,7 @@ class DetalleVentaProducto {
     private $cantidad;
     private $idVentaProducto;
     private $idProducto;
+    private $total;
 
     /**
      * @return mixed
@@ -126,5 +128,21 @@ class DetalleVentaProducto {
     public function setCantidad($cantidad)
     {
         $this->cantidad = $cantidad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param mixed $total
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
     }
 }

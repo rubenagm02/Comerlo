@@ -17,6 +17,7 @@ class DaoCompraProducto extends Conexion {
                       {$compraProducto->getIdProveedor()},
                       '{$compraProducto->getDescripcion()}',
                       '{$compraProducto->getFactura()}',
+                      {$compraProducto->getTotal()},
                       '{$compraProducto->getFecha()}',
                       1,
                       {$compraProducto->getUsuario()});";
@@ -82,6 +83,7 @@ class DaoCompraProducto extends Conexion {
         $compraProducto->setFactura($fila['Factura']);
         $compraProducto->setFecha($fila['Fecha']);
         $compraProducto->setEstatus($fila['Estatus']);
+        $compraProducto->setTotal($fila['Total']);
         $compraProducto->setUsuario($daoUsuario->consultar($fila['Usuario']));
 
         return $compraProducto;
@@ -96,6 +98,7 @@ class CompraProducto {
     private $descripcion;
     private $factura;
     private $fecha;
+    private $total;
     private $estatus;
     private $usuario;
     private $productos;
@@ -242,6 +245,22 @@ class CompraProducto {
     public function setProductos($productos)
     {
         $this->productos = $productos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param mixed $total
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
     }
 
 }

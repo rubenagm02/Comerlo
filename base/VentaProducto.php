@@ -17,6 +17,7 @@ class DaoVentaProducto extends Conexion {
                       {$ventaProducto->getIdCliente()},
                       '{$ventaProducto->getDescripcion()}',
                       '{$ventaProducto->getFactura()}',
+                      {$ventaProducto->getTotal()},
                       '{$ventaProducto->getFecha()}',
                       {$ventaProducto->getCantidad()},
                       1,
@@ -84,6 +85,7 @@ class DaoVentaProducto extends Conexion {
         $ventaProducto->setFecha($fila['Fecha']);
         $ventaProducto->setCantidad($fila['Cantidad']);
         $ventaProducto->setEstatus($fila['Estatus']);
+        $ventaProducto->setTotal($fila['Total']);
         $ventaProducto->setUsuario($daoUsuario->consultar($fila['Usuario']));
 
         return $ventaProducto;
@@ -101,7 +103,7 @@ class VentaProducto {
     private $estatus;
     private $usuario;
     private $productos;
-
+    private $total;
     /**
      * @return mixed
      */
@@ -260,6 +262,22 @@ class VentaProducto {
     public function setProductos($productos)
     {
         $this->productos = $productos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param mixed $total
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
     }
 
 }
