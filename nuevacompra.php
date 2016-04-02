@@ -102,12 +102,12 @@ $proveedores = $daoProveedor->consultarTodo();
         <div class="col-lg-4">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Selecciona un cliente</h3>
+                    <h3 class="box-title">Selecciona un proveedor</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <select class="form-control">
-                        <option value="0">Selecciona un cliente...</option>
+                    <select class="form-control" id="compra_proveedor">
+                        <option value="0">Selecciona un proveedor...</option>
                         <?php
                         foreach ($proveedores as $proveedor) {
                             echo "<option value='{$proveedor->getId()}'>{$proveedor->getNombre()}</option>";
@@ -124,16 +124,16 @@ $proveedores = $daoProveedor->consultarTodo();
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" id="compra_descripcion"></textarea>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <a class="btn btn-sm btn-info btn-flat pull-left">Terminar</a>
+            <a href="javascript:agregarCompra()" class="btn btn-sm btn-info btn-flat pull-left">Terminar</a>
         </div>
     </div>
-    <script src="js/nuevaventa.js"></script>
+    <script src="js/nuevacompra.js"></script>
 <?php
 require_once 'base/base_final.php';

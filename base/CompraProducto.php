@@ -25,16 +25,17 @@ class DaoCompraProducto extends Conexion {
         $consulta = $this->conexion->query($query);
 
         if ($query) {
+            $idCompraProducto = $this->conexion->insert_id;
             $daoDetalleCompraProductos = new DaoDetalleCompraProducto();
 
             //Se insertan los productos
             $productos = $compraProducto->getProductos();
 
             foreach ($productos as $producto) {
-
+                $producto->setIdCompraProducto($idCompraProducto);
                 $daoDetalleCompraProductos->insertar($producto);
             }
-            return $this->conexion->insert_id;
+            return $idCompraProducto;
         } else {
 
             return false;

@@ -19,23 +19,24 @@ class DaoVentaProducto extends Conexion {
                       '{$ventaProducto->getFactura()}',
                       {$ventaProducto->getTotal()},
                       '{$ventaProducto->getFecha()}',
-                      {$ventaProducto->getCantidad()},
                       1,
                       {$ventaProducto->getUsuario()});";
 
         $consulta = $this->conexion->query($query);
+        var_dump($query);
 
-        if ($query) {
+        if ($consulta) {
+            $idVentaProducto = $this->conexion->insert_id; 
             $daoDetalleVentaProducto = new DaoDetalleVentaProducto();
 
             //Se insertan los productos
             $productos = $ventaProducto->getProductos();
 
             foreach ($productos as $producto) {
-
+                $producto->setIdVentaProducto($idVentaProducto);
                 $daoDetalleVentaProducto->insertar($producto);
             }
-            return $this->conexion->insert_id;
+            return $idVentaProducto;
         } else {
 
             return false;

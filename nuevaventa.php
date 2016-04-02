@@ -76,7 +76,7 @@ $clientes = $daoCliente->consultarTodo();
         <div class="col-lg-8">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Productos en la venta</h3>
+                    <h3 class="box-title">Productos en la compra</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -106,7 +106,7 @@ $clientes = $daoCliente->consultarTodo();
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <select class="form-control">
+                    <select class="form-control" id="compra_proveedor">
                         <option value="0">Selecciona un cliente...</option>
                         <?php
                         foreach ($clientes as $cliente) {
@@ -114,7 +114,7 @@ $clientes = $daoCliente->consultarTodo();
                         }
                         ?>
                     </select>
-                 </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-8">
@@ -124,16 +124,16 @@ $clientes = $daoCliente->consultarTodo();
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" id="compra_descripcion"></textarea>
                 </div>
             </div>
         </div>
     </div>
-<div class="row">
-    <div class="col-lg-12">
-        <a class="btn btn-sm btn-info btn-flat pull-left">Terminar</a>
+    <div class="row">
+        <div class="col-lg-12">
+            <a href="javascript:agregarCompra()" class="btn btn-sm btn-info btn-flat pull-left">Terminar</a>
+        </div>
     </div>
-</div>
-<script src="js/nuevaventa.js"></script>
+    <script src="js/nuevaventa.js"></script>
 <?php
 require_once 'base/base_final.php';

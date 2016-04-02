@@ -23,7 +23,7 @@ function cargarFecha () {
 function agregarProducto (producto, nombre, precio) {
     var cantidad = prompt("Introduce la cantidad de productos");
     var total = (precio * cantidad);
-
+    
     var fila = '<tr class="producto_agregado" producto="' + producto + '" cantidad="' + cantidad + '" total="' + total + '"><td>' + nombre + '</td><td>'
         + precio + '</td><td>' + cantidad + '</td><td>'
         + total
@@ -40,25 +40,25 @@ function agregarCompra () {
     parametros.descripcion = $("#compra_descripcion").val();
     parametros.total = 0.0;
     parametros.factura = "FAC";
-
+    
     $.each($("tr.producto_agregado"), function (i, v) {
         var producto = {};
         producto.id = $(v).attr('producto');
         producto.cantidad = $(v).attr('cantidad');
         producto.total = $(v).attr('total');
-
+        
         parametros.total += Number(producto.total);
         parametros.productos.push(producto);
     });
-
+    
     if (parametros.productos.length > 0) {
-
-        $.post("peticiones/venta.php", parametros, function (respuesta) {
+        
+        $.post("peticiones/compra.php", parametros, function (respuesta) {
             alert(respuesta);
         });
     } else {
         alert("Debes agregar al menos un producto para guardar la compra");
     }
-
-
+    
+    
 }

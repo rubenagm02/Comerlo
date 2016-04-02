@@ -12,8 +12,8 @@ class DaoDetalleCompraProducto extends Conexion{
 
     public function insertar (DetalleCompraProducto $detalleCompraProducto) {
         $query = "INSERT INTO DetalleCompraProducto VALUES (DEFAULT ,
-                      {$detalleCompraProducto->getIdCompraProducto()},
                       {$detalleCompraProducto->getIdProducto()},
+                      {$detalleCompraProducto->getIdCompraProducto()},
                       {$detalleCompraProducto->getCantidad()},
                       {$detalleCompraProducto->getTotal()})";
 
