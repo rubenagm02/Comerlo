@@ -2,6 +2,7 @@
 require_once 'Conexion.php';
 require_once 'Usuario.php';
 require_once 'DetalleCompraProducto.php';
+require_once 'Proveedor.php';
 /**
  * Created by PhpStorm.
  * User: Ruben
@@ -73,13 +74,34 @@ class DaoCompraProducto extends Conexion {
         }
     }
 
+    public function consultarTodo () {
+        $query = "SELECT * FROM CompraProducto WHERE Estatus = 1";
+
+        $consulta = $this->conexion->query($query);
+
+        if ($consulta) {
+            $resultado = array();
+
+            for ($x = 0; $x < $consulta->num_rows; $x++) {
+                $consulta->data_seek($x);
+                array_push($resultado, $this->crearObjeto($consulta->fetch_assoc()));
+            }
+
+            return $resultado;
+        } else {
+
+            return false;
+        }
+    }
+
     private function crearObjeto ($fila) {
         $compraProducto = new CompraProducto();
+        $daoProveedor = new DaoProveedor();
         $daoUsuario = new DaoUsuario();
 
         $compraProducto->setId($fila['Id']);
         $compraProducto->setIdProducto($fila['IdProducto']);
-        $compraProducto->setIdProveedor($fila['IdProveedor']);
+        $compraProducto->setIdProveedor($daoProveedor->consultar($fila['IdProveedor']));
         $compraProducto->setDescripcion($fila['Descripcion']);
         $compraProducto->setFactura($fila['Factura']);
         $compraProducto->setFecha($fila['Fecha']);

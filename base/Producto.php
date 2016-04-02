@@ -22,7 +22,7 @@ class DaoProducto extends Conexion {
                       {$producto->getUsuario()});";
 
         $consulta = $this->conexion->query($query);
-        var_dump($this->conexion->error);
+
         if ($consulta) {
 
             return true;
@@ -50,6 +50,23 @@ class DaoProducto extends Conexion {
             return true;
         } else {
 
+            return false;
+        }
+    }
+    
+    public function actualizarExistencia ($idProducto, $cantidad) {
+        $producto = $this->consultar($idProducto);
+        $cantidad = $cantidad + $producto->getExistencia();
+        
+        $query = "UPDATE Producto SET Existencia = $cantidad WHERE Id = $idProducto";
+        
+        $consulta = $this->conexion->query($query);
+        
+        if ($consulta) {
+            
+            return true;
+        } else {
+            
             return false;
         }
     }

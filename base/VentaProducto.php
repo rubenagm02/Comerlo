@@ -2,6 +2,7 @@
 require_once 'Conexion.php';
 require_once 'Usuario.php';
 require_once 'DetalleVentaProducto.php';
+require_once 'Cliente.php';
 /**
  * Created by PhpStorm.
  * User: Ruben
@@ -73,18 +74,38 @@ class DaoVentaProducto extends Conexion {
             return false;
         }
     }
+    
+    public function consultarTodo () {
+        $query = "SELECT * FROM VentaProducto WHERE Estatus = 1";
+        
+        $consulta = $this->conexion->query($query);
+        
+        if ($consulta) {
+            $resultado = array();
+            
+            for ($x = 0; $x < $consulta->num_rows; $x++) {
+                $consulta->data_seek($x);
+                array_push($resultado, $this->crearObjeto($consulta->fetch_assoc()));
+            }
+            
+            return $resultado;
+        } else {
+            
+            return false;
+        }
+    }
 
     private function crearObjeto ($fila) {
         $ventaProducto = new VentaProducto();
+        $daoCliente = new DaoCliente();
         $daoUsuario = new DaoUsuario();
 
         $ventaProducto->setId($fila['Id']);
         $ventaProducto->setIdProducto($fila['IdProducto']);
-        $ventaProducto->setIdCliente($fila['IdCliente']);
+        $ventaProducto->setIdCliente($daoCliente->consultar($fila['IdCliente']));
         $ventaProducto->setDescripcion($fila['Descripcion']);
         $ventaProducto->setFactura($fila['Factura']);
         $ventaProducto->setFecha($fila['Fecha']);
-        $ventaProducto->setCantidad($fila['Cantidad']);
         $ventaProducto->setEstatus($fila['Estatus']);
         $ventaProducto->setTotal($fila['Total']);
         $ventaProducto->setUsuario($daoUsuario->consultar($fila['Usuario']));

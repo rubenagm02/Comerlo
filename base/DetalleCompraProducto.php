@@ -8,6 +8,8 @@ require_once 'Conexion.php';
  * Time: 08:29 AM
  */
 
+require_once 'Producto.php';
+
 class DaoDetalleCompraProducto extends Conexion{
 
     public function insertar (DetalleCompraProducto $detalleCompraProducto) {
@@ -20,7 +22,9 @@ class DaoDetalleCompraProducto extends Conexion{
         $consulta = $this->conexion->query($query);
 
         if ($consulta) {
-
+            
+            $daoProducto = new DaoProducto();
+            $daoProducto->actualizarExistencia($detalleCompraProducto->getIdProducto(), $detalleCompraProducto->getCantidad());
             return $this->conexion->insert_id;
         } else {
 

@@ -22,6 +22,7 @@ require_once 'base/Producto.php';
                         <th>Medida</th>
                         <th>Estatus</th>
                         <th>Precio</th>
+                        <th>Existencia</th>
                         <th>Última modificación</th>
                         <th>Acción</th>
                     </tr>
@@ -35,7 +36,8 @@ require_once 'base/Producto.php';
                     echo "<td>{$producto->getNombre()}</td>";
                     echo "<td>{$producto->getMedida()}</td>";
                     echo "<td>{$producto->getEstatus()}</td>";
-                    echo "<td>{$producto->getPrecio()}</td>";
+                    echo "<td>$ " . number_format($producto->getPrecio(), 2, ".", ",") . "</td>";
+                    echo "<td>{$producto->getExistencia()}</td>";
                     echo "<td>{$producto->getUsuario()->getNombre()}</td>";
                     echo "<td><a href=\"altaproducto.php?id={$producto->getId()}\" class=\"btn btn-sm btn-info btn-flat pull-left\">Editar</a></td>";
                 }
