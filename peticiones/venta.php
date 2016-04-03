@@ -38,3 +38,13 @@ if ($_POST['action'] == "agregarCompra") {
     $ventaProducto->setProductos($productos);
     $daoCompraProducto->insertar($ventaProducto);
 }
+
+if ($_POST['action'] == "baja") {
+    $idCompra = $_POST['compra'];
+
+    $daoCompraProducto = new DaoVentaProducto();
+    $compraProducto = $daoCompraProducto->consultar($idCompra);
+    $compraProducto->setEstatus(0);
+    $compraProducto->setUsuario(2);
+    $daoCompraProducto->actualizar($compraProducto);
+}

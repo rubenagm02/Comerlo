@@ -39,7 +39,7 @@ require_once 'base/base_inicial.php';
                     echo '<td>' . $compra->getFactura() . '</td>';
                     echo '<td>' . $compra->getIdProveedor()->getNombre() . '</td>';
                     echo '<td>' . $compra->getUsuario()->getNombre() . '</td>';
-                    echo '<td><a class=\"btn btn-sm btn-info btn-flat pull-left\">Ver más</a></td></tr>';
+                    echo '<td><a href="compra.php?id=' .$compra->getId() . '" class="btn btn-sm btn-info btn-flat pull-left">Editar</a></td></tr>';
                 }
                 ?>
                 </tbody></table>

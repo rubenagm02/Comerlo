@@ -97,6 +97,7 @@ class DaoCompraProducto extends Conexion {
     private function crearObjeto ($fila) {
         $compraProducto = new CompraProducto();
         $daoProveedor = new DaoProveedor();
+        $daoDetalleCompraProducto = new DaoDetalleCompraProducto();
         $daoUsuario = new DaoUsuario();
 
         $compraProducto->setId($fila['Id']);
@@ -105,6 +106,7 @@ class DaoCompraProducto extends Conexion {
         $compraProducto->setDescripcion($fila['Descripcion']);
         $compraProducto->setFactura($fila['Factura']);
         $compraProducto->setFecha($fila['Fecha']);
+        $compraProducto->setProductos($daoDetalleCompraProducto->obtenerCompra($fila['Id']));
         $compraProducto->setEstatus($fila['Estatus']);
         $compraProducto->setTotal($fila['Total']);
         $compraProducto->setUsuario($daoUsuario->consultar($fila['Usuario']));

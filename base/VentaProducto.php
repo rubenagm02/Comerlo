@@ -99,6 +99,7 @@ class DaoVentaProducto extends Conexion {
         $ventaProducto = new VentaProducto();
         $daoCliente = new DaoCliente();
         $daoUsuario = new DaoUsuario();
+        $daoDetalleVentaProducto = new DaoDetalleVentaProducto();
 
         $ventaProducto->setId($fila['Id']);
         $ventaProducto->setIdProducto($fila['IdProducto']);
@@ -106,6 +107,7 @@ class DaoVentaProducto extends Conexion {
         $ventaProducto->setDescripcion($fila['Descripcion']);
         $ventaProducto->setFactura($fila['Factura']);
         $ventaProducto->setFecha($fila['Fecha']);
+        $ventaProducto->setProductos($daoDetalleVentaProducto->obtenerVenta($fila['Id']));
         $ventaProducto->setEstatus($fila['Estatus']);
         $ventaProducto->setTotal($fila['Total']);
         $ventaProducto->setUsuario($daoUsuario->consultar($fila['Usuario']));
