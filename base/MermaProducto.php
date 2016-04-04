@@ -1,6 +1,7 @@
 <?php
 require_once 'Conexion.php';
 require_once 'Usuario.php';
+require_once 'Producto.php';
 /**
  * Created by PhpStorm.
  * User: Ruben
@@ -8,7 +9,7 @@ require_once 'Usuario.php';
  * Time: 11:00 PM
  */
 
-class DaoMermaProducto {
+class DaoMermaProducto extends Conexion{
 
     public function insertar (MermaProducto $mermaProducto) {
         $query = "INSERT INTO MermaProducto VALUES (DEFAULT,
@@ -20,7 +21,7 @@ class DaoMermaProducto {
 
         $consulta = $this->conexion->query($query);
 
-        if ($query) {
+        if ($consulta) {
 
             return true;
         } else {
@@ -42,13 +43,34 @@ class DaoMermaProducto {
             return false;
         }
     }
+    
+    public function consultarTodo () {
+        $query = "SELECT * FROM MermaProducto";
+        
+        $consulta = $this->conexion->query($query);
+        
+        if ($consulta) {
+            $resultado = array();
+            
+            for ($x = 0; $x < $consulta->num_rows; $x++) {
+                $consulta->data_seek($x);
+                array_push($resultado, $this->crearObjeto($consulta->fetch_assoc()));
+            }
+            
+            return $resultado;
+        } else {
+            
+            return false;
+        }
+    }
 
     private function crearObjeto ($fila) {
         $mermaProducto = new MermaProducto();
         $daoUsuario = new DaoUsuario();
+        $daoProducto = new DaoProducto();
 
         $mermaProducto->setId($fila['Id']);
-        $mermaProducto->setIdProducto($fila['IdProducto']);
+        $mermaProducto->setIdProducto($daoProducto->consultar($fila['IdProducto']));
         $mermaProducto->setDescripcion($fila['Descripcion']);
         $mermaProducto->setFecha($fila['Fecha']);
         $mermaProducto->setCantidad($fila['Cantidad']);

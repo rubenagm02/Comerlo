@@ -90,9 +90,11 @@ $compraProducto = $daoCompraProducto->consultar($_GET['id']);
             <button type="button" onclick="atras()" class="btn btn-block btn-info btn-lg">Voler a las compras</button>
         </div>
         <div class="col-lg-4 col-md-2 col-sm-2"></div>
+        <?php if ($compraProducto->getEstatus() == 1) { ?>
         <div class="col-lg-4 col-md-2 col-sm-4">
             <button type="button" onclick="baja(<?php echo $compraProducto->getId()?>)" class="btn btn-block btn-danger btn-lg">Dar de baja</button>
         </div>
+        <?php } ?>
     </div>
 <script src="js/compra.js"></script>
 <?php

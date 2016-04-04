@@ -96,8 +96,9 @@
                     <ul class="treeview-menu">
                         <li><a href="ventas.php"><i class="fa fa-circle-o"></i> Ventas</a></li>
                         <li><a href="compras.php"><i class="fa fa-circle-o"></i> Compras</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Mermas</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Baja</a></li>
+                        <li><a href="ventasbaja.php"><i class="fa fa-circle-o"></i> Bajas venta</a></li>
+                        <li><a href="comprasbaja.php"><i class="fa fa-circle-o"></i> Bajas compra</a></li>
+                        <li><a href="mermas.php"><i class="fa fa-circle-o"></i> Mermas</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

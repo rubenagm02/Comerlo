@@ -75,8 +75,8 @@ class DaoVentaProducto extends Conexion {
         }
     }
     
-    public function consultarTodo () {
-        $query = "SELECT * FROM VentaProducto WHERE Estatus = 1";
+    public function consultarTodo ($extra = "") {
+        $query = "SELECT * FROM VentaProducto WHERE Estatus = 1 " . $extra;
         
         $consulta = $this->conexion->query($query);
         
@@ -91,6 +91,26 @@ class DaoVentaProducto extends Conexion {
             return $resultado;
         } else {
             
+            return false;
+        }
+    }
+
+    public function consultarTodoBaja () {
+        $query = "SELECT * FROM VentaProducto WHERE Estatus = 0";
+
+        $consulta = $this->conexion->query($query);
+
+        if ($consulta) {
+            $resultado = array();
+
+            for ($x = 0; $x < $consulta->num_rows; $x++) {
+                $consulta->data_seek($x);
+                array_push($resultado, $this->crearObjeto($consulta->fetch_assoc()));
+            }
+
+            return $resultado;
+        } else {
+
             return false;
         }
     }
