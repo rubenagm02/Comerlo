@@ -48,3 +48,20 @@ if ($_POST['action'] == "baja") {
     $compraProducto->setUsuario(2);
     $daoCompraProducto->actualizar($compraProducto);
 }
+
+if ($_POST['action'] == "reporteVenta") {
+    $fechaInicio = $_POST['inicio'];
+    $fechaFin = $_POST['fin'];
+    $daoCompraProducto = new DaoCompraProducto();
+    $compras = $daoCompraProducto->consultarTodo("AND Fecha > '$fechaInicio' AND Fecha < '$fechaFin'");
+
+    foreach ($compras as $compra) {
+        echo '<tr></tr><td>' . $compra->getFecha() . '</td>';
+        echo '<td>' . $compra->getTotal() . '</td>';
+        echo '<td>' . $compra->getFactura() . '</td>';
+        echo '<td>' . $compra->getIdProveedor()->getNombre() . '</td>';
+        echo '<td>' . $compra->getUsuario()->getNombre() . '</td>';
+        echo '<td><a href="compra.php?id=' .$compra->getId() . '" class="btn btn-sm btn-info btn-flat pull-left">Editar</a></td></tr>';
+    }
+
+}

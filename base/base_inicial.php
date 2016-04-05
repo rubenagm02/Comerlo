@@ -83,10 +83,10 @@
                         <i class="fa fa-dashboard"></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> Existencia</a></li>
-                        <li><a href="index.html"><i class="fa fa-circle-o"></i> Reporte de ventas</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Reporte de compras</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Reporte de mermas</a></li>
+                        <!--<li><a href="index.html"><i class="fa fa-circle-o"></i> Existencia</a></li>-->
+                        <li><a href="reporteventas.php"><i class="fa fa-circle-o"></i> Reporte de ventas</a></li>
+                        <li><a href="reportecompras.php"><i class="fa fa-circle-o"></i> Reporte de compras</a></li>
+                        <!--<li><a href="index2.html"><i class="fa fa-circle-o"></i> Reporte de mermas</a></li>-->
                     </ul>
                 </li>
                 <li class="treeview">
