@@ -18,7 +18,7 @@ if ($_POST['action'] == "merma") {
     $mermaProducto->setDescripcion($_POST['descripcion']);
     $mermaProducto->setFecha(date("Y-m-d"));
     $mermaProducto->setCantidad($_POST['cantidad']);
-    $mermaProducto->setUsuario(1);
+    $mermaProducto->setUsuario($_COOKIE['usuario']);
     
     $daoMermaProducto->insertar($mermaProducto);
     $daoProducto->actualizarExistencia($_POST['producto'], $_POST['cantidad'] * -1);

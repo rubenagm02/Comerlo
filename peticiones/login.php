@@ -13,7 +13,7 @@ if ($_POST['action'] == "login") {
     $usuario    = $daoUsuario->login($_POST['usuario'], $_POST['password']);
 
     if ($usuario !== false) {
-        setcookie("usuario", $usuario->getId());
+        setcookie("usuario", $usuario->getId(), time() + 86400, "/");
 
         echo json_encode(array("respuesta" => "correcto"));
     } else {

@@ -9,8 +9,9 @@ function baja(compra){
         parametros.action = "baja";
         parametros.compra = compra;
 
-        $.post("peticiones/compra.php", parametros, function (respuesta) {
-            alert(respuesta);
+        $.post("peticiones/compra.php", parametros, function (respuesta) { 
+            alert("Se ha dado de baja la compra");
+            window.location = "compras.php";
         });
     }
 }

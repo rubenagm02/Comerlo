@@ -8,6 +8,7 @@
 
 require_once '../base/Producto.php';
 require_once '../base/VentaProducto.php';
+require_once '../base/Usuario.php';
 
 if ($_POST['action'] == "agregarCompra") {
     $daoProducto = new DaoProducto();
@@ -25,7 +26,7 @@ if ($_POST['action'] == "agregarCompra") {
     $ventaProducto->setTotal($_POST['total']);
     $ventaProducto->setFecha(date("Y-m-d"));
     $ventaProducto->setEstatus(1);
-    $ventaProducto->setUsuario(1);
+    $ventaProducto->setUsuario($_COOKIE['usuario']);
 
     foreach ($_POST['productos'] as $producto) {
         $detalleCompraProducto = new DetalleVentaProducto();
@@ -45,7 +46,7 @@ if ($_POST['action'] == "baja") {
     $daoCompraProducto = new DaoVentaProducto();
     $compraProducto = $daoCompraProducto->consultar($idCompra);
     $compraProducto->setEstatus(0);
-    $compraProducto->setUsuario(2);
+    $compraProducto->setUsuario($_COOKIE['usuario']);
     $daoCompraProducto->actualizar($compraProducto);
 }
 
@@ -61,7 +62,13 @@ if ($_POST['action'] == "reporteVenta") {
         echo '<td>' . $compra->getFactura() . '</td>';
         echo '<td>' . $compra->getIdCliente()->getNombre() . '</td>';
         echo '<td>' . $compra->getUsuario()->getNombre() . '</td>';
-        echo '<td><a href="venta.php?id=' . $compra->getId() . '" class="btn btn-sm btn-info btn-flat pull-left">Editar</a></td></tr>';
+
+        $daoUsuario = new DaoUsuario();
+        $usuario = $daoUsuario->consultar($_COOKIE['usuario']);
+
+        if ($usuario->getPuesto() != "Auxiliar") {
+            echo '<td><a href="venta.php?id=' . $compra->getId() . '" class="btn btn-sm btn-info btn-flat pull-left">Editar</a></td></tr>';
+        }
     }
 
 }

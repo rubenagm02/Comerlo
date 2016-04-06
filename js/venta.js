@@ -10,7 +10,8 @@ function baja(compra){
         parametros.compra = compra;
 
         $.post("peticiones/venta.php", parametros, function (respuesta) {
-            alert(respuesta);
+            alert("Se ha dado de baja la venta");
+            window.location = "ventas.php";
         });
     }
 }

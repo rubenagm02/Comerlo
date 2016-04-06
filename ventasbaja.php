@@ -39,7 +39,10 @@ require_once 'base/base_inicial.php';
                     echo '<td>' . $compra->getFactura() . '</td>';
                     echo '<td>' . $compra->getIdCliente()->getNombre() . '</td>';
                     echo '<td>' . $compra->getUsuario()->getNombre() . '</td>';
-                    echo '<td><a href="venta.php?id=' . $compra->getId() . '" class="btn btn-sm btn-info btn-flat pull-left">Editar</a></td></tr>';
+                    
+                    if ($usuario->getPuesto() != "Auxiliar") {
+                        echo '<td><a href="venta.php?id=' . $compra->getId() . '" class="btn btn-sm btn-info btn-flat pull-left">Editar</a></td></tr>';
+                    }
                 }
                 ?>
                 </tbody></table>

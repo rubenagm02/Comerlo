@@ -26,8 +26,10 @@ require_once 'base/base_inicial.php';
                                 <th>Precio</th>
                                 <th>Existencia</th>
                                 <th>Última modificación</th>
-                                <th>Edición</th>
-                                <th>Merma</th>
+                                <?php if ($usuario->getPuesto() != "Auxiliar") { ?>
+                                    <th>Edición</th>
+                                    <th>Merma</th>
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +44,10 @@ require_once 'base/base_inicial.php';
                             echo "<td>$ " . number_format($producto->getPrecio(), 2, ".", ",") . "</td>";
                             echo "<td>{$producto->getExistencia()}</td>";
                             echo "<td>{$producto->getUsuario()->getNombre()}</td>";
-                            echo "<td><a href=\"altaproducto.php?id={$producto->getId()}\" class=\"btn btn-sm btn-info btn-flat pull-left\">Editar</a></td>";
-                            echo "<td><a href=\"merma.php?id={$producto->getId()}\" class=\"btn btn-sm btn-info btn-flat pull-left\">Registrar merma</a></td></tr>";
+                            if ($usuario->getPuesto() != "Auxiliar") {
+                                echo "<td><a href=\"altaproducto.php?id={$producto->getId()}\" class=\"btn btn-sm btn-info btn-flat pull-left\">Editar</a></td>";
+                                echo "<td><a href=\"merma.php?id={$producto->getId()}\" class=\"btn btn-sm btn-info btn-flat pull-left\">Registrar merma</a></td></tr>";
+                            }
                         }
         
                         ?>

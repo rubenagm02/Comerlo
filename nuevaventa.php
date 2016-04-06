@@ -24,7 +24,7 @@ $clientes = $daoCliente->consultarTodo();
 
                 <div class="info-box-content">
                     <span class="info-box-text">Fecha</span>
-                    <span class="info-box-number" id="fecha_actual">2,000</span>
+                    <span class="info-box-number" id="fecha_actual"><?php echo date("d - M - Y"); ?></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -35,7 +35,7 @@ $clientes = $daoCliente->consultarTodo();
 
                 <div class="info-box-content">
                     <span class="info-box-text">Usuario</span>
-                    <span class="info-box-number">2,000</span>
+                    <span class="info-box-number"><?php echo $usuario->getNombre();?></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -76,7 +76,7 @@ $clientes = $daoCliente->consultarTodo();
         <div class="col-lg-8">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Productos en la compra</h3>
+                    <h3 class="box-title">Productos en la venta</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

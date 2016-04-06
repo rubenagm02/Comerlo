@@ -54,7 +54,7 @@ function agregarCompra () {
     if (parametros.productos.length > 0) {
 
         $.post("peticiones/venta.php", parametros, function (respuesta) {
-            alert(respuesta);
+            window.location = "ventas.php";
         });
     } else {
         alert("Debes agregar al menos un producto para guardar la compra");

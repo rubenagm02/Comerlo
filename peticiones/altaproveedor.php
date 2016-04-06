@@ -19,7 +19,7 @@ if ($_POST['action'] == "alta") {
     $proveedor->setTelefono($_POST['telefono']);
     $proveedor->setCorreo($_POST['correo']);
     $proveedor->setObservaciones($_POST['observaciones']);
-    $proveedor->setUsuario(1);
+    $proveedor->setUsuario($_COOKIE['usuario']);
 
     $resultado = false;
 

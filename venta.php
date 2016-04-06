@@ -91,7 +91,7 @@ $compraProducto = $daoCompraProducto->consultar($_GET['id']);
         </div>
         <div class="col-lg-4 col-md-2 col-sm-2"></div>
         <?php 
-            if ($compraProducto->getEstatus() == 1) {
+            if ($compraProducto->getEstatus() == 1 && $usuario->getPuesto() != "Auxiliar") {
         ?>
         <div class="col-lg-4 col-md-2 col-sm-4">
             <button type="button" onclick="baja(<?php echo $compraProducto->getId()?>)" class="btn btn-block btn-danger btn-lg">Dar de baja</button>

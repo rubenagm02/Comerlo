@@ -12,7 +12,7 @@ function merma(producto) {
         parametros.cantidad = $("#merma_cantidad").val();
         
         $.post("peticiones/merma.php", parametros, function (respuesta) {
-            alert(respuesta);
+            window.location = "mermas.php";
         });
     }
 }

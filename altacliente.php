@@ -17,6 +17,9 @@ if (isset($_GET['id'])) {
     $cliente = $daoCliente->consultar($_GET['id']);
 }
 ?>
+
+    <!-- Se valida que no sea un usuario auxiliar-->
+<?php if ($usuario->getPuesto() != "Auxiliar") { ?>
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Cliente</h3>
@@ -64,5 +67,6 @@ if (isset($_GET['id'])) {
         ?>
     </div>
     <script src="js/altacliente.js"></script>
+    <?php } ?>
 <?php
 require_once 'base/base_final.php';

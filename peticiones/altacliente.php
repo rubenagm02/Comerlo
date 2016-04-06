@@ -19,7 +19,7 @@ if ($_POST['action'] == "alta") {
     $cliente->setTelefono($_POST['telefono']);
     $cliente->setCorreo($_POST['correo']);
     $cliente->setObservaciones($_POST['observaciones']);
-    $cliente->setUsuario(1);
+    $cliente->setUsuario($_COOKIE['usuario']);
 
     $resultado = false;
 

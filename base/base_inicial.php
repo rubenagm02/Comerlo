@@ -1,3 +1,23 @@
+
+<?php
+    require_once 'Usuario.php';
+    $usuario = null;
+    if (isset($_COOKIE['usuario'])) {
+        $daoUsuario = new DaoUsuario();
+        $usuario = $daoUsuario->consultar($_COOKIE['usuario']);
+
+        if (strlen($usuario->getNombre()) > 1) {
+            //De momento nada
+        } else {
+            header('Location: login.php');
+        }
+    } else {
+        //Se redirije
+        header('Location: login.php');
+
+    }
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,15 +78,19 @@
                 <ul class="nav navbar-nav">
                     <!-- Barra de navegación-->
                     <li class="dropdown notifications-menu">
-                        <a href="nuevaventa.php" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-dollar"></i>
+                        <a href="nuevaventa.php"  >
+                            <i class="fa fa-arrow-circle-up"></i>
                         </a>
                     </li>
-                    <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-money"></i>
-                        </a>
-                    </li>
+
+                    <!-- Se valida que no sea un usuario auxiliar-->
+                    <?php if ($usuario->getPuesto() != "Auxiliar") { ?>
+                        <li class="dropdown notifications-menu">
+                            <a href="nuevacompra.php"  >
+                                <i class="fa fa-arrow-circle-down"></i>
+                            </a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>
@@ -80,7 +104,7 @@
                 <li class="header">Menú de opciones</li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-file-text-o"></i> <span>Reportes</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         <!--<li><a href="index.html"><i class="fa fa-circle-o"></i> Existencia</a></li>-->
@@ -91,41 +115,49 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Movimientos de producto</span> <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-exchange"></i> <span>Movimientos de producto</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="ventas.php"><i class="fa fa-circle-o"></i> Ventas</a></li>
                         <li><a href="compras.php"><i class="fa fa-circle-o"></i> Compras</a></li>
                         <li><a href="ventasbaja.php"><i class="fa fa-circle-o"></i> Bajas venta</a></li>
                         <li><a href="comprasbaja.php"><i class="fa fa-circle-o"></i> Bajas compra</a></li>
-                        <li><a href="mermas.php"><i class="fa fa-circle-o"></i> Mermas</a></li>
+                        <li><a href="mermas.php"><i class="fa fa-thumbs-o-down"></i> Mermas</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Productos</span> <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-database"></i> <span>Productos</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="altaproducto.php"><i class="fa fa-circle-o"></i> Alta de producto</a></li>
+                        <?php if ($usuario->getPuesto() != "Auxiliar") { ?>
+                            <li><a href="altaproducto.php"><i class="fa fa-circle-o"></i> Alta de producto</a></li>
+                        <?php } ?>
                         <!--<li><a href="index2.html"><i class="fa fa-circle-o"></i> Baja de producto</a></li>-->
                         <li><a href="totalproductos.php"><i class="fa fa-circle-o"></i> Ver productos</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-group"></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="altacliente.php"><i class="fa fa-circle-o"></i> Alta de cliente</a></li>
+                        <!-- Se valida que no sea un usuario auxiliar-->
+                        <?php if ($usuario->getPuesto() != "Auxiliar") { ?>
+                            <li><a href="altacliente.php"><i class="fa fa-circle-o"></i> Alta de cliente</a></li>
+                        <?php } ?>
                         <li><a href="totalclientes.php"><i class="fa fa-circle-o"></i> Mostrar clientes</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Proveedores</span> <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-group"></i> <span>Proveedores</span> <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="altaproveedor.php"><i class="fa fa-circle-o"></i> Alta de proveedor</a></li>
+                        <!-- Se valida que no sea un usuario auxiliar-->
+                        <?php if ($usuario->getPuesto() != "Auxiliar") { ?>
+                            <li><a href="altaproveedor.php"><i class="fa fa-circle-o"></i> Alta de proveedor</a></li>
+                        <?php } ?>
                         <li><a href="totalproveedores.php"><i class="fa fa-circle-o"></i> Mostrar proveedores</a></li>
                     </ul>
                 </li>
@@ -140,9 +172,6 @@
             <h1>
                 Comerlo
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Venta</a></li>
-            </ol>
         </section>
         <section class="content">
             <div class="row">

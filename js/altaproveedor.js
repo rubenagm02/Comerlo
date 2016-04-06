@@ -17,7 +17,7 @@ function alta(proveedor){
     }
 
     $.post("peticiones/altaproveedor.php", params, function (respuesta) {
-        alert(respuesta);
+        window.location = "totalproveedores.php";
     });
 
 }

@@ -16,6 +16,6 @@ function alta (producto) {
     }
 
     $.post("peticiones/altaproducto.php", params, function (respuesta) {
-        alert(respuesta);
+        window.location = "totalproductos.php";
     });
 }

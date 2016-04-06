@@ -17,7 +17,7 @@ if ($_POST['action'] == "alta") {
     $producto->setMedida($_POST['medida']);
     $producto->setEstatus(1);
     $producto->setPrecio($_POST['precio']);
-    $producto->setUsuario(1);
+    $producto->setUsuario($_COOKIE['usuario']);
 
     $resultado = false;
 

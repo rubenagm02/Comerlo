@@ -18,7 +18,7 @@ function alta(cliente){
     }
 
     $.post("peticiones/altacliente.php", params, function (respuesta) {
-        alert(respuesta);
+        window.location = "totalclientes.php";
     });
 
 }
